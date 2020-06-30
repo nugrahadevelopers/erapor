@@ -72,4 +72,9 @@ class RegisterController extends Controller
             'api_token' => Str::random(32),
         ]);
     }
+
+    public function showRegistrationForm()
+    {
+        return view('erapor.auth.register');
+    }
 }
