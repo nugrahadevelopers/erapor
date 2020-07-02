@@ -18,7 +18,7 @@
                             </div>
                             <form class="user" method="POST" action="{{ route('register') }}">
                                 @csrf
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                         <input id="name" type="text" class="form-control form-control-user" name="name" value="{{ old('name') }}" required placeholder="First Name">
 
                                         @error('name')
@@ -26,7 +26,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <input id="email" type="email" class="form-control form-control-user" name="email" value="{{ old('email') }}" required placeholder="Email Address">
 

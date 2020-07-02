@@ -17,7 +17,6 @@ class CreateAdminTable extends Migration
             $table->id();
             $table->UnsignedBigInteger('user_id');
             $table->String('name');
-            $table->String('email');
             $table->String('phone')->nullable();
             $table->String('address')->nullable();
             $table->timestamps();

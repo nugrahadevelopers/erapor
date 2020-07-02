@@ -12,4 +12,5 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .copyDirectory('node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free', 'public/vendor/fontawesome-free');

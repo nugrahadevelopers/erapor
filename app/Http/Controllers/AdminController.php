@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AdminRequest;
 use App\Admin;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -37,20 +39,27 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
-        $data = $request->validate([
-            'user_id' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-        ]);
+        $admin = new Admin;
+        $admin->user_id = '5';
+        $admin->name = $request->name;
+        $admin->phone = $request->phone;
+        $admin->address = $request->address;
+        $admin->save();
 
-        $admin = Admin::create($data);
-
-        return response()->json([
-            'message' => "Admin telah berhasil ditambahkan",
-            'data' => $admin,
-        ], 201);
+        if ($admin) {
+            return response()->json([
+                'status'  => true,
+                'message' => 'Admin Berhasil Disimpan!',
+                'data'    => $admin
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Admin Gagal Disimpan!',
+            ], 400);
+        }
     }
 
     /**
@@ -90,7 +99,8 @@ class AdminController extends Controller
         $data = $request->validate([
             'user_id' => 'required',
             'name' => 'required',
-            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
         ]);
 
         $admin->update($data);
@@ -114,5 +124,11 @@ class AdminController extends Controller
         return response()->json([
             'message' => "Berhasil dihapus"
         ], 200);
+    }
+
+    public function vadmin()
+    {
+        $user = User::all();
+        return view('erapor.admin', ['user' => $user]);
     }
 }

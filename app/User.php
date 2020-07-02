@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token',
+        'email', 'password', 'role_id', 'api_token',
     ];
 
     /**
@@ -39,5 +39,13 @@ class User extends Authenticatable
 
     public function admin(){
         return $this->hasMany(Admin::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+    
+    public function hasPermission($permission) {
+        return $this->role->permissions()->where('name', $permission)->first() ?: false;
     }
 }
